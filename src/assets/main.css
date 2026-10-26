@@ -1,0 +1,257 @@
+/* ==========================================================================
+   MODERN CLEAN 1-COLUMN VERCEL DESIGN SYSTEM
+   Theme: Pitch Dark (#0a0a0a) + Violet/Indigo Accent (#8b5cf6)
+   Typography: Space Grotesk (Headings) + Plus Jakarta Sans (Body) + JetBrains Mono
+   Layout: 1-Column Centered Flow (Top Header -> Hero -> Bento -> Skills -> Projects -> Timeline -> Contact -> Footer)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Pitch Dark Vercel Palette */
+  --bg-dark: #0a0a0a;
+  --bg-surface: #111113;
+  --bg-card: rgba(24, 24, 27, 0.65);
+  --bg-card-hover: rgba(39, 39, 42, 0.85);
+  --bg-glass: rgba(10, 10, 10, 0.85);
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  /* Violet / Indigo Accent Palette */
+  --accent-violet: #8b5cf6;
+  --accent-violet-hover: #a78bfa;
+  --accent-violet-soft: rgba(139, 92, 246, 0.12);
+  --accent-violet-border: rgba(139, 92, 246, 0.35);
+
+  --border-color: #27272a;
+  --border-strong: #3f3f46;
+  --border-hover: rgba(139, 92, 246, 0.45);
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --shadow-glow: 0 0 35px rgba(139, 92, 246, 0.2);
+  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-dark: #fafafa;
+  --bg-surface: #f4f4f5;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+
+  --accent-violet: #6d28d9;
+  --accent-violet-soft: rgba(109, 40, 217, 0.1);
+  --accent-violet-border: rgba(109, 40, 217, 0.3);
+
+  --border-color: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --border-hover: rgba(109, 40, 217, 0.4);
+
+  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.06);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+}
+
+/* Custom Interactive Cursor */
+.custom-cursor-dot, .custom-cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease, transform 0.15s ease-out;
+}
+
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-violet);
+  box-shadow: 0 0 10px var(--accent-violet);
+}
+
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.2px solid rgba(139, 92, 246, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+body.cursor-hover .custom-cursor-ring {
+  transform: translate(-50%, -50%) scale(1.5);
+  border-color: var(--accent-violet);
+  background-color: var(--accent-violet-soft);
+}
+
+@media (max-width: 992px) {
+  .custom-cursor-dot, .custom-cursor-ring { display: none !important; }
+}
+
+/* Background Particle Canvas */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Layout Container (1-Column Centered Flow) */
+.container {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  padding: 7rem 0;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 4rem auto;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: var(--accent-violet-soft);
+  border: 1px solid var(--accent-violet-border);
+  border-radius: var(--radius-full);
+  color: var(--accent-violet);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 1.2rem;
+}
+
+.section-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.9rem;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Vue Animations */
+.project-list-move,
+.project-list-enter-active,
+.project-list-leave-active {
+  transition: all 0.45s var(--ease-smooth);
+}
+
+.project-list-enter-from,
+.project-list-leave-to {
+  opacity: 0;
+  transform: translateY(25px) scale(0.95);
+}
+
+.project-list-leave-active {
+  position: absolute;
+  width: calc(100% - 2rem);
+}
+
+/* Modal Fade & Scale */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-smooth);
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-from .modal-box,
+.modal-fade-leave-to .modal-box {
+  transform: scale(0.94) translateY(15px);
+}
+
+/* Toast Slide */
+.toast-slide-enter-active,
+.toast-slide-leave-active {
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.toast-slide-enter-from,
+.toast-slide-leave-to {
+  opacity: 0;
+  transform: translateX(100%) scale(0.92);
+}
